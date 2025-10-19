@@ -112,11 +112,46 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+.layout {
+  @apply mx-auto px-4 max-w-lg sm:max-w-xl
+         md:max-w-2xl lg:max-w-3xl xl:max-w-6xl   min-h-screen;
+}
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+  /* Reserve scrollbar gutter to avoid layout shift when scrollbars are hidden/removed
+     (e.g. libraries that lock body scroll). Modern browsers support `scrollbar-gutter`.
+     This prevents the page from resizing when the dropdown/menu triggers overflow changes. */
+  /* Reserve scrollbar gutter to avoid layout shift when scrollbars are hidden/removed.
+     Use both-edges to be more aggressive across browsers. */
+  html {
+    scrollbar-gutter: stable both-edges;
+  }
+
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* When react-remove-scroll-bar (or similar) locks scroll it sets
+     `data-scroll-locked` on the body and provides a CSS variable
+     --removed-body-scroll-bar-size. Ensure we respect that and reserve
+     the same space so the layout doesn't shift. */
+  body[data-scroll-locked] {
+    /* Try to reserve space using the injected variable from react-remove-scroll-bar.
+       Use both padding and margin fallbacks since different layouts may rely on one. */
+    padding-right: var(--removed-body-scroll-bar-size, 0px) !important;
+    margin-right: var(--removed-body-scroll-bar-size, 0px) !important;
+    /* Keep overscroll behavior contained while locked */
+    overscroll-behavior: contain;
+  }
+
+  /* For centered layout containers that use `mx-auto` a scrollbar disappearance
+     can change the visual center. Ensure the main layout reserves the same space. */
+  .layout {
+    padding-right: var(--removed-body-scroll-bar-size, 0px);
+  }
+  button {
+    @apply cursor-pointer;
   }
 }
