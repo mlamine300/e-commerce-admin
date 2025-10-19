@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🧭 Project Overview
 
-## Getting Started
+Ultimate ShadCN Dashboard is a modern, fully responsive admin dashboard web application built with Next.js 14, React, Tailwind CSS, and shadcn/ui.
+It showcases a sleek, accessible, and customizable interface ideal for SaaS platforms, analytics dashboards, or internal admin tools.
 
-First, run the development server:
+⚙️ Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Next.js 14 – App Router, Server Components, and optimized performance
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+React 18 – Component-based, reactive UI architecture
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+shadcn/ui – Beautiful, accessible UI components built on Radix UI
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Tailwind CSS – Utility-first styling for fast, consistent design
 
-## Learn More
+TypeScript – Strong typing and better developer experience
 
-To learn more about Next.js, take a look at the following resources:
+TanStack Table – Powerful and flexible data tables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+React Hook Form + Zod – Type-safe form validation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Recharts – Interactive charts and visualizations
 
-## Deploy on Vercel
+Dark Mode Support – Smooth theme toggling
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🌟 Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+📊 Dashboard Layout: Responsive grid-based layout with sidebar, navbar, and content sections
+
+🌗 Dark/Light Mode: Built-in theme switching for user preference
+
+📈 Data Visualization: Dynamic charts and graphs for analytics display
+
+🧮 Advanced Tables: Sorting, filtering, and pagination with TanStack Table
+
+🧾 Form Handling: Validated input forms using React Hook Form and Zod
+
+🧩 Reusable Components: Modular and customizable component architecture
+
+⚡ Performance-Optimized: Leverages Next.js server rendering and code-splitting
+
+🚀 Use Cases
+
+Admin & analytics dashboards
+
+SaaS control panels
+
+Internal company tools
+
+Developer starter template for UI-heavy projects
