@@ -8,7 +8,9 @@ import DropdownMenu, {
   ContentMenu,
 } from "../ui/dropdown-menu";
 import { LogOut, Settings, User } from "lucide-react";
+import Link from "next/link";
 const Myaccount = () => {
+  const user = { id: 1 };
   return (
     <div className="relative">
       <DropdownMenu>
@@ -25,9 +27,14 @@ const Myaccount = () => {
           <div className="w-32 px-2 flex flex-col gap-2">
             <h3 className="text-sm font-semibold">My account</h3>
             <p className="h-px bg-primary/20 my-1"></p>
-            <ContentItem className="flex gap-3 items-center">
-              <User size={20} />
-              <p>Profile</p>
+            <ContentItem>
+              <Link
+                className="flex gap-3 items-center"
+                href={`/users/${user.id}`}
+              >
+                <User size={20} />
+                <p>Profile</p>
+              </Link>
             </ContentItem>
             <ContentItem className="flex gap-3 items-center">
               <Settings size={20} />
