@@ -39,6 +39,10 @@ const DropdownMenu = ({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [open]);
+  useEffect(() => {
+    // alert(`open : ${open}`);
+    console.log(`open : ${open}`);
+  }, [open]);
   return (
     <dropDownContext.Provider value={{ open, setOpen }}>
       <div ref={dropdownRef}>{children}</div>
@@ -48,9 +52,8 @@ const DropdownMenu = ({
 export const ButtonTrigger = ({
   children,
   className,
-}: {
-  children: React.ReactElement | React.ReactElement[];
-  className?: string;
+}: React.ComponentProps<"button"> & {
+  asChild?: boolean;
 }) => {
   const { setOpen } = useDropDownContext();
   return (
@@ -81,7 +84,7 @@ export const ContentMenu = ({
   return (
     <div
       className={twMerge(
-        "absolute  bg-background p-2 rounded shadow border",
+        "absolute z-50  bg-background p-2 rounded shadow border",
         positionStyle,
         className,
         open ? "flex" : "hidden"
@@ -94,14 +97,18 @@ export const ContentMenu = ({
 export const ContentItem = ({
   children,
   className,
-}: {
-  children: React.ReactElement | (React.ReactElement | string)[] | string;
-  className?: string;
+  ...props
+}: React.ComponentProps<"button"> & {
+  asChild?: boolean;
 }) => {
   const { setOpen } = useDropDownContext();
 
   return (
-    <button className={twMerge("", className)} onClick={() => setOpen(false)}>
+    <button
+      {...props}
+      className={twMerge("", className)}
+      onClick={() => setOpen(false)}
+    >
       {children}
     </button>
   );
