@@ -29,7 +29,7 @@ const UserEditForm = ({ initUser, setUser }: any) => {
   const close = useRef<HTMLButtonElement | null>(null);
 
   const formSchema = zod.object({
-    username: zod
+    "Full Name": zod
       .string()
       .min(3, "Name must be at least 3 characters.")
       .max(35, "Name must be at most 35 characters."),
@@ -37,11 +37,14 @@ const UserEditForm = ({ initUser, setUser }: any) => {
     phone: zod
       .string()
       .regex(/^\d{10,15}$/, "Phone number must contain 10–15 digits"),
-    location: zod
+    address: zod
       .string()
-      .min(3, "Location must be at least 3 characters.")
-      .max(100, "Location must be at most 100 characters."),
-    role: zod.enum(["Admin", "User"]),
+      .min(3, "Address must be at least 3 characters.")
+      .max(100, "Address must be at most 100 characters."),
+    city: zod
+      .string()
+      .min(3, "city must be at least 3 characters.")
+      .max(100, "city must be at most 100 characters."),
   });
   const form = useForm<zod.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

@@ -9,6 +9,7 @@ import DropdownMenu, {
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
 import { ArrowUpDown, MoreHorizontal, MoreVertical } from "lucide-react";
+import Link from "next/link";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -57,11 +58,11 @@ export const columns: ColumnDef<Payment>[] = [
       return (
         <p
           className={cn(
-            " text-center font-semibold text-lg  rounded",
-            status === "pending" && "bg-amber-300",
-            status === "success" && "bg-green-500",
-            status === "failed" && "bg-red-500",
-            status === "processing" && "bg-indigo-500"
+            " text-center font-semibold text-sm p-1  rounded",
+            status === "pending" && "bg-amber-300/50",
+            status === "success" && "bg-green-500/50",
+            status === "failed" && "bg-red-500/50",
+            status === "processing" && "bg-indigo-500/50"
           )}
         >
           {status as string}{" "}
@@ -100,6 +101,7 @@ export const columns: ColumnDef<Payment>[] = [
     id: "actions",
     cell: ({ row }) => {
       const payment = row.original;
+      const id = row.original.id;
 
       return (
         <div className="relative">
@@ -121,7 +123,7 @@ export const columns: ColumnDef<Payment>[] = [
               </ContentItem>
               <p className="h-1 w-full bg-foreground/20" />
               <ContentItem className="px-2 hover:bg-foreground/20">
-                View customer
+                <Link href={`/users/${id}`}> View customer</Link>
               </ContentItem>
               <ContentItem className="px-2 hover:bg-foreground/20">
                 View payment details

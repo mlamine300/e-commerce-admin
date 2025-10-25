@@ -6,12 +6,13 @@ import UserEditForm from "./UserEditForm";
 
 const UserInformation = () => {
   const [userInfo, setUserInfo] = useState({
-    username: "John Doe",
+    "Full Name": "John Doe",
     email: "john.doe@gmail.com",
     // normalized to digits only to satisfy the form regex (10-15 digits)
     phone: "1234567890",
-    location: "New York, NY",
-    role: "Admin",
+    address: "random street Ba2",
+    city: "New York, NY",
+
     "joined on": "2025-10-10",
   });
   return (
