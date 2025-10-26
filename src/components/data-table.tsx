@@ -20,18 +20,25 @@ import {
 } from "@/components/ui/table";
 import { Button } from "./ui/button";
 import React from "react";
+import { Trash2 } from "lucide-react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  deletionFunction?: () => void;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  deletionFunction,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
-
+  const [rowSelection, setRowSelection] = React.useState({});
+  const [pagination, setPagination] = React.useState({
+    pageIndex: 0, //initial page index
+    pageSize: 5, //default page size
+  });
   const table = useReactTable({
     data,
     columns,
@@ -39,12 +46,38 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
+    onRowSelectionChange: setRowSelection,
+    onPaginationChange: setPagination,
     state: {
       sorting,
+      rowSelection,
+      pagination,
     },
   });
+  if (!deletionFunction) {
+    deletionFunction = () => {
+      const rows = Object.keys(rowSelection).map((r) => Number(r));
+      const idToDelete = data
+        .filter((d, index) => rows.includes(index))
+        .map((d: any) => d.id);
+      console.log(idToDelete);
+    };
+  }
+
   return (
     <div>
+      <div className="flex justify-end m-2">
+        {Object.keys(rowSelection).length > 0 && (
+          <Button
+            onClick={() => deletionFunction()}
+            className="px-4"
+            variant={"destructive"}
+          >
+            <Trash2 />
+            <p> {`Delete ${Object.keys(rowSelection).length} item`}</p>
+          </Button>
+        )}
+      </div>
       <div className="overflow-hidden rounded-md border">
         <Table>
           <TableHeader>
@@ -65,6 +98,7 @@ export function DataTable<TData, TValue>({
               </TableRow>
             ))}
           </TableHeader>
+
           <TableBody className="overflow-hidden">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
